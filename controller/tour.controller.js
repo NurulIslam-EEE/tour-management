@@ -30,10 +30,18 @@ module.exports.getAllTours = async (req, res, next) => {
       .sort(queries.sort);
       const total=await Tour.countDocuments(filters);
       const pageCount=Math.ceil(total/queries.limit)
-    res.status(200).json({
-      status: "success",
-      data: {pageCount,total,data:result},
-    });
+      if (req.query.page){
+        res.status(200).json({
+          status: "success",
+          data: {pageCount,total,data:result},
+        });
+      }else{
+        res.status(200).json({
+          status: "success",
+          data: result,
+        });
+      }
+   
   } catch (err) {
     res.status(400).json({
       status: "failed",
