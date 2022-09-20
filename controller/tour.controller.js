@@ -18,7 +18,7 @@ module.exports.getAllTours = async (req, res, next) => {
     }
 
     if (req.query.page) {
-      const { page = 1, limit = 1 } = req.query;
+      const { page = 1, limit = 5 } = req.query;
       const skip = (page - 1) * parseInt(limit);
       queries.skip = skip;
       queries.limit = parseInt(limit);
